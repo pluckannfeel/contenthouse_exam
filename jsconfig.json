@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "paths": {
+      "@assets": ["shared/assets"],
+      "@components": ["shared/components"],
+      "@contexts": ["shared/contexts"],
+      "@functions": ["shared/functions"],
+      "@hooks": ["shared/hooks"],
+      "@layouts": ["shared/layouts"],
+      "@modals": ["shared/modals"],
+      "@models": ["shared/models"],
+      "@redux": ["shared/redux"],
+      "@pages": ["shared/pages"],
+      "@sections": ["sections"],
+      "@styles": ["shared/styles"],
+      "@themes": ["shared/themes"]
+    }
+  },
+  "exclude": ["node_modules"]
+}

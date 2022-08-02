@@ -1,0 +1,91 @@
+{
+  "parser": "@babel/eslint-parser",
+  "extends": "airbnb",
+  "plugins": ["react", "jsx-a11y", "react-hooks"],
+  "env": {
+    "browser": true,
+    "es6": true,
+    "jest": true
+  },
+  "globals": {
+    "$": "writable",
+    "ApplicationAssetPaths": "writable",
+    "Stripe": "writable",
+    "swal": "writable"
+  },
+  "parserOptions": {
+    "babelOptions": {
+      "presets": ["@babel/preset-react"]
+    },
+    "ecmaVersion": "latest",
+    "ecmaFeatures": {
+      "jsx": true,
+      "experimentalObjectRestSpread": true
+    },
+    "project": "jsconfig.json",
+    "sourceType": "module",
+    "requireConfigFile": false
+  },
+  "rules": {
+    "arrow-parens": ["error", "as-needed", { "requireForBlockBody": true }],
+    "camelcase": 0,
+    "import/no-unresolved": "off", // temporary
+    "import/no-extraneous-dependencies": [
+      "error",
+      { "devDependencies": [ ".storybook/**", "app/javascript/**/*.stories.*"] }
+    ],
+    "indent" : "off", // temporary: Remove when is https://github.com/babel/babel-eslint/issues/530 fixed
+    "jsx-a11y/anchor-has-content": 0,
+    "jsx-a11y/anchor-is-valid": 0,
+    "jsx-a11y/click-events-have-key-events": 0,
+    "jsx-a11y/label-has-for": 0,
+    "jsx-a11y/no-noninteractive-tabindex": 0,
+    "jsx-a11y/no-static-element-interactions": 0,
+    "jsx-a11y/label-has-associated-control": [2, {
+      "controlComponents": ["Field"],
+      "depth": 3
+    }],
+    "linebreak-style": ["error", "windows"],
+    "max-len": ["error", 175, 4],
+    "no-nested-ternary": "off",
+    "no-underscore-dangle": ["error", { "allowAfterThis": true }],
+    "no-void": "off",
+    "object-curly-newline": "off",
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "react/forbid-prop-types": 0,
+    "react/jsx-fragments": 0,
+    "react/jsx-one-expression-per-line": 0,
+    "react/jsx-props-no-spreading": 0,
+    "react/require-default-props": 0,
+    "react-hooks/rules-of-hooks": "error",
+    "semi": ["error", "never"],
+    "space-before-blocks": [
+      "error",
+      { "functions": "never", "keywords": "never", "classes": "always" }
+    ],
+    "template-curly-spacing" : "off" // temporary: Remove when is https://github.com/babel/babel-eslint/issues/530 fixed
+  },
+  "settings": {
+    "import/resolver": {
+      "alias": {
+        "map": [
+          ["@assets", "./src/shared/assets"],
+          ["@components", "./src/shared/components"],
+          ["@contexts", "./src/shared/contexts"],
+          ["@functions", "./src/shared/functions"],
+          ["@hooks", "./src/shared/hooks"],
+          ["@layouts", "./src/shared/layouts"],
+          ["@modals", "./src/shared/modals"],
+          ["@models", "./src/shared/models"],
+          ["@redux", "./src/shared/redux"],
+          ["@pages", "./src/shared/pages"],
+          ["@sections", "./src/sections"],
+          ["@styles", "./src/shared/styles"],
+          ["@themes", "./src/shared/themes"]
+        ],
+        "extensions": [".ts", ".js", ".jsx", ".json"]
+      },
+      "babel-module": {}
+    }
+  }
+}
