@@ -18,7 +18,7 @@ import {
   RHFSelect,
 } from '@components/hook-form';
 
-import useUser from '@hooks/useUser';
+import useCompany from '@hooks/useCompany';
 
 const ContentStyle = styled('div')(({ theme }) => ({
   maxWidth: 480,
@@ -28,41 +28,32 @@ const ContentStyle = styled('div')(({ theme }) => ({
   padding: theme.spacing(3, 0),
 }));
 
-function User(props) {
+const Company = (props) => {
   const { isNew } = props;
   const navigate = useNavigate();
 
-  const { userId } = useParams();
+  const { companyId } = useParams();
 
   const {
-    callbacks: { createUser: createFn, updateUser: updateFn },
-    user,
-  } = useUser({ id: userId });
+    company,
+    callbacks: { createCompany: createFn, updateCompany: updateFn },
+  } = useCompany({ id: companyId });
 
-  const UserSchema = Yup.object().shape({
+  const CompanySchema = Yup.object().shape({
     name: Yup.string().required('Name required'),
-    company: Yup.string().required('Company required'),
-    role: Yup.string().required('Role'),
-    verified: Yup.bool().required('Required'),
-    status: Yup.string().required('Status is required'),
+    description: Yup.string().notRequired(),
+    vip: Yup.bool().required('Required'),
   });
 
   const defaultValues = {
     name: '',
-    company: '',
-    role: '',
-    verified: false,
-    status: '',
+    description: '',
+    vip: false,
   };
 
-  const statuses = [
-    { label: 'Active', value: 'active' },
-    { label: 'Banned', value: 'banned' },
-  ];
-
   const methods = useForm({
-    resolver: yupResolver(UserSchema),
-    defaultValues: { ...defaultValues, ...user },
+    resolver: yupResolver(CompanySchema),
+    defaultValues: { ...defaultValues, ...company },
   });
 
   const {
@@ -78,7 +69,7 @@ function User(props) {
           return;
         }
 
-        navigate('/dashboard/users', { replace: true });
+        navigate('/dashboard/companies', { replace: true });
       });
     } else {
       updateFn(data).then(({ success, errors }) => {
@@ -87,13 +78,13 @@ function User(props) {
           return;
         }
 
-        navigate('/dashboard/users', { replace: true });
+        navigate('/dashboard/companies', { replace: true });
       });
     }
   };
 
   return (
-    <Page title='User'>
+    <Page title='Company'>
       <Container>
         <Stack
           direction='row'
@@ -102,24 +93,19 @@ function User(props) {
           mb={5}
         >
           <Typography variant='h4' gutterBottom>
-            {isNew ? 'Create' : 'Update'} User
+            {isNew ? 'Create' : 'Update'} Company
           </Typography>
         </Stack>
+
         <Card>
           <Container>
             <ContentStyle>
               <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
                 <Stack spacing={2}>
                   <RHFTextField name='name' label='Name' />
-                  <RHFTextField name='company' label='Company' />
-                  <RHFTextField name='role' label='Role' />
+                  <RHFTextField name='description' label='Description' />
                   <Stack direction='row' spacing={2}>
-                    <RHFSelect
-                      name='status'
-                      label='Status'
-                      options={statuses}
-                    />
-                    <RHFCheckbox name='verified' label='Verified' />
+                    <RHFCheckbox name='vip' label='Is VIP' />
                   </Stack>
                   <LoadingButton
                     fullWidth
@@ -138,10 +124,10 @@ function User(props) {
       </Container>
     </Page>
   );
-}
+};
 
-User.propTypes = {
+Company.propTypes = {
   isNew: PropTypes.bool,
 };
 
-export default User;
+export default Company;

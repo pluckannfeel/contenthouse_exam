@@ -27,16 +27,15 @@ const defaultState = {
   shoMenu: false,
 };
 
-export default function UserMoreMenu(props) {
-  const { user } = props;
-
+export default function CompanyMoreMenu(props) {
+  const { company } = props;
   const [state, setState] = useSetState(defaultState);
   const { showDialog, showMenu } = state;
 
   const ref = useRef(null);
 
   const {
-    callbacks: { deleteUser },
+    callbacks: { deleteCompany },
   } = useContext(PageContext);
 
   return (
@@ -51,10 +50,10 @@ export default function UserMoreMenu(props) {
         aria-labelledby='alert-dialog-title'
         aria-describedby='alert-dialog-description'
       >
-        <DialogTitle id='alert-dialog-title'>Delete User</DialogTitle>
+        <DialogTitle id='alert-dialog-title'>Delete Company</DialogTitle>
         <DialogContent>
           <DialogContentText id='alert-dialog-description'>
-            Are you sure you want to delete this user?
+            Are you sure you want to delete this company?
           </DialogContentText>
         </DialogContent>
         <DialogActions>
@@ -62,7 +61,7 @@ export default function UserMoreMenu(props) {
             Cancel
           </Button>
           <Button
-            onClick={() => deleteUser(user)}
+            onClick={() => deleteCompany(company)}
             autoFocus
             variant='contained'
             color='primary'
@@ -97,7 +96,7 @@ export default function UserMoreMenu(props) {
 
         <MenuItem
           component={RouterLink}
-          to={`/dashboard/users/${user.id}`}
+          to={`/dashboard/companies/${company.id}`}
           sx={{ color: 'text.secondary' }}
         >
           <ListItemIcon>
@@ -113,6 +112,6 @@ export default function UserMoreMenu(props) {
   );
 }
 
-UserMoreMenu.propTypes = {
-  user: PropTypes.object,
+CompanyMoreMenu.propTypes = {
+  company: PropTypes.object,
 };
