@@ -33,7 +33,7 @@ const SearchStyle = styled(OutlinedInput)(({ theme }) => ({
   },
 }));
 
-export default function UserListToolbar(props) {
+export default function CompanyListToolbar(props) {
   const { numSelected, filterName, onFilterName } = props;
 
   return (
@@ -53,7 +53,7 @@ export default function UserListToolbar(props) {
         <SearchStyle
           value={filterName}
           onChange={onFilterName}
-          placeholder='Search user...'
+          placeholder='Search company...'
           startAdornment={
             <InputAdornment position='start'>
               <Iconify
@@ -82,7 +82,7 @@ export default function UserListToolbar(props) {
   );
 }
 
-UserListToolbar.propTypes = {
+CompanyListToolbar.propTypes = {
   numSelected: PropTypes.number,
   filterName: PropTypes.string,
   onFilterName: PropTypes.func,

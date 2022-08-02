@@ -1,16 +1,18 @@
-import * as users from './user'
-import * as entities from '../entities'
+import * as users from './user';
+import * as companies from './company';
+import * as entities from '../entities';
 
 const modules = {
-    entities,
-    users,
-}
+  entities,
+  users,
+  companies,
+};
 
 export const reducers = Object.keys(modules).reduce((acc, moduleKey) => {
-    const module = modules[moduleKey]
-    acc[moduleKey] = module.default
+  const module = modules[moduleKey];
+  acc[moduleKey] = module.default;
 
-    return acc
-}, {})
+  return acc;
+}, {});
 
-export default modules
+export default modules;
